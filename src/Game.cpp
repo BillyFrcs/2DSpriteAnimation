@@ -1,4 +1,4 @@
-#include "Game.h"
+#include "Game.hpp"
 
 Billy::Game::Game() : _window(),
                       Animation_Object(),

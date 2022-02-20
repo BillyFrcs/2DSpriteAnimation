@@ -1,4 +1,4 @@
-#include "Animation.h"
+#include "Animation.hpp"
 
 #include <iostream>
 
@@ -214,7 +214,7 @@ void Billy::Animation::UpdatePlayer()
      if (this->_jumpSpeed >= 150)
      {
           this->_jumpSpeed = 0.0f;
-          
+
           this->_isJump = false;
      }
 }
@@ -228,7 +228,7 @@ void Billy::Animation::UpdateCollision()
 
           if (this->_isCollision)
           {
-              this->GetPlayerPosition()->x = *this->_position;
+               this->GetPlayerPosition()->x = *this->_position;
           }
      }
 
@@ -239,7 +239,7 @@ void Billy::Animation::UpdateCollision()
 
           if (this->_isCollision)
           {
-              this->GetPlayerPosition()->x = *this->_position;
+               this->GetPlayerPosition()->x = *this->_position;
           }
      }
 
@@ -250,7 +250,7 @@ void Billy::Animation::UpdateCollision()
 
           if (this->_isCollision)
           {
-              this->GetPlayerPosition()->y = *this->_position;
+               this->GetPlayerPosition()->y = *this->_position;
           }
      }
 
@@ -261,7 +261,7 @@ void Billy::Animation::UpdateCollision()
 
           if (this->_isCollision)
           {
-              this->GetPlayerPosition()->y = *this->_position;
+               this->GetPlayerPosition()->y = *this->_position;
           }
      }
 }

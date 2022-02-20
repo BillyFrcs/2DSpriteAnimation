@@ -7,7 +7,7 @@
 
 #include "raylib.h"
 
-#include "Animation.h"
+#include "Animation.hpp"
 
 class Animation;
 

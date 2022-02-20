@@ -7,7 +7,7 @@
 
 #include "raylib.h"
 
-#include "Game.h"
+#include "Game.hpp"
 
 namespace Billy
 {
