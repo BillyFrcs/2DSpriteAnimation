@@ -15,17 +15,17 @@ jobs:
     - name: make setup
       run: make setup
       
-    - name: make bin/app
-      run: make bin/app
+    - name: make bin/2DSpriteAnimation
+      run: make bin/2DSpriteAnimation
     - name: 'export binary'
       uses: actions/upload-artifact@v2
       with:
-          name: app
-          path: bin/app
+          name: 2DSpriteAnimation
+          path: bin/2DSpriteAnimation
     - name: make clean
       run: make clean
 
-    - name: make bin/app CXX=g++
-      run: make bin/app CXX=g++
+    - name: make bin/2DSpriteAnimation CXX=g++
+      run: make bin/2DSpriteAnimation CXX=g++
     - name: make clean
       run: make clean

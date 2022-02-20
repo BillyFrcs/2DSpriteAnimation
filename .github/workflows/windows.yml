@@ -17,22 +17,22 @@ jobs:
       run: mingw32-make setup
       shell: cmd
       
-    - name: make bin/app
-      run: mingw32-make bin/app
+    - name: make bin/2DSpriteAnimation
+      run: mingw32-make bin/2DSpriteAnimation
       shell: cmd
       
     - name: 'export binary'
       uses: actions/upload-artifact@v2
       with:
-          name: app.exe
-          path: bin/app.exe
+          name: 2DSpriteAnimation.exe
+          path: bin/2DSpriteAnimation.exe
       
     - name: make clean
       run: mingw32-make clean
       shell: cmd
 
-    - name: make bin/app CXX=g++
-      run: mingw32-make bin/app CXX=g++
+    - name: make bin/2DSpriteAnimation CXX=g++
+      run: mingw32-make bin/2DSpriteAnimation CXX=g++
       shell: cmd
   
     - name: make clean
