@@ -1,29 +1,10 @@
-#include <raylib-cpp.hpp>
+#include "Game.h"
 
-int main() {
-    
-    // Initialization
-    int screenWidth = 800;
-    int screenHeight = 450;
+int main(void)
+{
+    Billy::Game *GameAnimation = new Billy::Game();
 
-    raylib::Color textColor(LIGHTGRAY);
-    raylib::Window w(screenWidth, screenHeight, "Raylib C++ Starter Kit Example");
-    
-    SetTargetFPS(60);
+    GameAnimation->RunGameAnimation();
 
-    // Main game loop
-    while (!w.ShouldClose()) // Detect window close button or ESC key
-    {
-        // Update
-
-        // TODO: Update your variables here
-
-        // Draw
-        BeginDrawing();
-        ClearBackground(RAYWHITE);
-        textColor.DrawText("Congrats! You created your first window!", 190, 200, 20);
-        EndDrawing();
-    }
-
-    return 0;
+    return EXIT_SUCCESS;
 }
