@@ -25,7 +25,7 @@ $ make setup
 $ make
 ```
 
-> Get the [Raylib Template](https://github.com/CapsCollective/raylib-cpp-starter) C++ for making Games from scratch.
+> Get the [Raylib C++](https://github.com/CapsCollective/raylib-cpp-starter) template for making Games from scratch.
 
 ## Assets
 
