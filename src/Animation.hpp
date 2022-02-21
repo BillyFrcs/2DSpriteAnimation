@@ -6,6 +6,8 @@
 #include <raylib-cpp.hpp>
 #include <raylib.h>
 
+#include <iostream>
+
 #include "Game.hpp"
 
 namespace Billy
@@ -20,9 +22,9 @@ namespace Billy
           void InitPlayerAnimation();
           void WalkAnimation();
           void CheerAnimation();
-          void PlayerMovement();
-          void PlayerJump();
-          void PlayerController();
+          void *PlayerMovement();
+          void *PlayerJump();
+          void *PlayerController();
           void Collision();
           void DrawSprite();
           void DrawRectangleFrame();

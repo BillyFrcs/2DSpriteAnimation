@@ -1,13 +1,14 @@
 #include "Animation.hpp"
 
-#include <iostream>
+namespace Component
+{
+     constexpr auto PLAYER_SHEET = "Assets/Character/FemaleAdventure/Tilesheet/character_femaleAdventurer_sheetHD.png";
+     constexpr auto FONT = "Assets/Fonts/cocogoose.ttf";
 
-constexpr auto PLAYER_SHEET = "Assets/Character/FemaleAdventure/Tilesheet/character_femaleAdventurer_sheetHD.png";
-constexpr auto FONT = "Assets/Fonts/cocogoose.ttf";
-
-static constexpr auto MAX_FRAME_SPEED = 20;
-static constexpr auto MIN_FRAME_SPEED = 1;
-static constexpr auto PLAYER_JUMP_SPEED = 200.0f;
+     static constexpr auto MAX_FRAME_SPEED = 20;
+     static constexpr auto MIN_FRAME_SPEED = 1;
+     static constexpr auto PLAYER_JUMP_SPEED = 200.0f;
+}
 
 Billy::Animation::Animation() : _playerTexture(),
                                 _playerPosition(),
@@ -53,12 +54,16 @@ Billy::Animation::~Animation()
      delete (_playerPosition);
      delete (_playerFrameRectangle);
      delete (_font);
+
+     free(PlayerController());
+     free(PlayerMovement());
+     free(PlayerJump());
 }
 
 void Billy::Animation::InitPlayerAnimation()
 {
      // Load texture
-     *this->_playerTexture = LoadTexture(PLAYER_SHEET);
+     *this->_playerTexture = LoadTexture(Component::PLAYER_SHEET);
 
      static float xPosition = 300.0f;
      static float yPosition = 100.0f;
@@ -69,7 +74,7 @@ void Billy::Animation::InitPlayerAnimation()
      *this->_playerFrameRectangle = {0.0f, 1025, static_cast<float>(this->_playerTexture->width) / 9, static_cast<float>(this->_playerTexture->height) / 4.7f};
 
      // Load font
-     *this->_font = LoadFont(FONT);
+     *this->_font = LoadFont(Component::FONT);
 }
 
 void Billy::Animation::CheerAnimation()
@@ -99,13 +104,13 @@ void Billy::Animation::CheerAnimation()
           this->_frameSpeed--;
      }
 
-     if (this->_frameSpeed > MAX_FRAME_SPEED)
+     if (this->_frameSpeed > Component::MAX_FRAME_SPEED)
      {
-          this->_frameSpeed = MAX_FRAME_SPEED;
+          this->_frameSpeed = Component::MAX_FRAME_SPEED;
      }
-     else if (this->_frameSpeed < MIN_FRAME_SPEED)
+     else if (this->_frameSpeed < Component::MIN_FRAME_SPEED)
      {
-          this->_frameSpeed = MIN_FRAME_SPEED;
+          this->_frameSpeed = Component::MIN_FRAME_SPEED;
      }
 }
 
@@ -137,27 +142,27 @@ void Billy::Animation::WalkAnimation()
           this->_frameSpeed--;
      }
 
-     if (this->_frameSpeed > MAX_FRAME_SPEED)
+     if (this->_frameSpeed > Component::MAX_FRAME_SPEED)
      {
-          this->_frameSpeed = MAX_FRAME_SPEED;
+          this->_frameSpeed = Component::MAX_FRAME_SPEED;
      }
-     else if (this->_frameSpeed < MIN_FRAME_SPEED)
+     else if (this->_frameSpeed < Component::MIN_FRAME_SPEED)
      {
-          this->_frameSpeed = MIN_FRAME_SPEED;
+          this->_frameSpeed = Component::MIN_FRAME_SPEED;
      }
 }
 
-void Billy::Animation::PlayerController()
+void *Billy::Animation::PlayerController()
 {
-     this->CheerAnimation();
-
      PlayerMovement();
 
      PlayerJump();
 }
 
-void Billy::Animation::PlayerMovement()
+void *Billy::Animation::PlayerMovement()
 {
+     this->CheerAnimation();
+
      // Movement with keyboard input
      if (this->_isWalk)
      {
@@ -201,7 +206,7 @@ void Billy::Animation::PlayerMovement()
      */
 }
 
-void Billy::Animation::PlayerJump()
+void *Billy::Animation::PlayerJump()
 {
      // Player jump
      if (IsKeyDown(KEY_SPACE))
@@ -289,7 +294,7 @@ void Billy::Animation::DrawRectangleFrame()
 
      DrawText("PRESS RIGHT/LEFT KEYS to CHANGE SPEED!", 230, 40, 10, DARKGRAY);
 
-     for (uint32_t animation = FP_ZERO; animation < MAX_FRAME_SPEED; animation++)
+     for (uint32_t animation = FP_ZERO; animation < Component::MAX_FRAME_SPEED; animation++)
      {
           if (animation < this->_frameSpeed)
           {

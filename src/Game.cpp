@@ -38,8 +38,6 @@ void *Billy::Game::GameLoop()
 
           this->Animation_Object->Collision();
 
-          std::cerr << "FPS: " << _window->GetFPS() << std::endl;
-
           // Draw
           BeginDrawing();
 
