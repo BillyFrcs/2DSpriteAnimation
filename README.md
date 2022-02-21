@@ -29,4 +29,4 @@ $ make
 
 ## Assets
 
-Sprite Sheet from [Kenney.nl](https://www.kenney.nl/)
+2D Sprite Sheet from [Kenney.nl](https://www.kenney.nl/)
