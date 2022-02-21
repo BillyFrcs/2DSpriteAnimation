@@ -1,11 +1,12 @@
 #pragma once
 
-#ifndef GAME_H
-#define GAME_H
+#ifndef GAME_HPP
+#define GAME_HPP
 
 #include <raylib-cpp.hpp>
+#include <raylib.h>
 
-#include "raylib.h"
+#include <iostream>
 
 #include "Animation.hpp"
 
@@ -26,8 +27,8 @@ namespace Billy
           ~Game();
 
      public:
-          void GameLoop();
-          void RunGameAnimation();
+          void *GameLoop();
+          void *Run();
 
      private:
           raylib::Window *_window;

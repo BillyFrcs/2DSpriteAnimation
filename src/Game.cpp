@@ -7,7 +7,7 @@ Billy::Game::Game() : _window(),
      this->_FPSGame = new int(60);
 
      // Initialize
-     this->_window = new raylib::Window(Screen::SCREEN_WIDTH, Screen::SCREEN_HEIGHT, "2D Sprite Animation");
+     this->_window = new raylib::Window(Screen::SCREEN_WIDTH, Screen::SCREEN_HEIGHT, "2D Sprite Animation", false);
 
      // Target FPS
      SetTargetFPS(*this->_FPSGame);
@@ -18,22 +18,27 @@ Billy::Game::Game() : _window(),
 
 Billy::Game::~Game()
 {
+     delete (_window);
+     delete (Animation_Object);
+
+     free(GameLoop());
+     free(Run());
 }
 
-void Billy::Game::GameLoop()
+void *Billy::Game::GameLoop()
 {
      // Initialize
-     this->Animation_Object->InitTexturePlayer();
+     this->Animation_Object->InitPlayerAnimation();
 
      // Game loop
      while (!this->_window->ShouldClose()) // Press ESC to exit
      {
           // Update
-          this->Animation_Object->UpdateAnimation();
+          this->Animation_Object->PlayerController();
 
-          this->Animation_Object->UpdatePlayer();
+          this->Animation_Object->Collision();
 
-          this->Animation_Object->UpdateCollision();
+          std::cerr << "FPS: " << _window->GetFPS() << std::endl;
 
           // Draw
           BeginDrawing();
@@ -46,7 +51,7 @@ void Billy::Game::GameLoop()
      }
 }
 
-void Billy::Game::RunGameAnimation()
+void *Billy::Game::Run()
 {
      this->GameLoop();
 }
