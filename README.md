@@ -2,7 +2,7 @@
 
 ![2D Sprite Animation](https://github.com/BillyFrcs/2DSpriteAnimation/blob/main/Assets/Sample/Animation.gif)
 
-Simple and easy 2D Player Game animation and movement created from scratch using C++ and [Raylib](https://www.raylib.com/index.html) library.
+Simple and easy 2D Player Animation and Movement Game created from scratch using C++ and [Raylib](https://www.raylib.com/index.html) graphics library.
 
 ## Getting Started
 
