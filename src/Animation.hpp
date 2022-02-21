@@ -1,11 +1,10 @@
 #pragma once
 
-#ifndef ANIMATION_H
-#define ANIMATION_H
+#ifndef ANIMATION_HPP
+#define ANIMATION_HPP
 
 #include <raylib-cpp.hpp>
-
-#include "raylib.h"
+#include <raylib.h>
 
 #include "Game.hpp"
 
@@ -18,12 +17,15 @@ namespace Billy
           ~Animation();
 
      public:
-          void InitTexturePlayer();
+          void InitPlayerAnimation();
           void WalkAnimation();
           void CheerAnimation();
-          void UpdateAnimation();
-          void UpdatePlayer();
-          void UpdateCollision();
+          void PlayerMovement();
+          void PlayerJump();
+          void PlayerController();
+          void Collision();
+          void DrawSprite();
+          void DrawRectangleFrame();
           void Draw();
 
      public:

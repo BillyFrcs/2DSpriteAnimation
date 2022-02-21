@@ -49,9 +49,13 @@ Billy::Animation::Animation() : _playerTexture(),
 
 Billy::Animation::~Animation()
 {
+     delete (_playerTexture);
+     delete (_playerPosition);
+     delete (_playerFrameRectangle);
+     delete (_font);
 }
 
-void Billy::Animation::InitTexturePlayer()
+void Billy::Animation::InitPlayerAnimation()
 {
      // Load texture
      *this->_playerTexture = LoadTexture(PLAYER_SHEET);
@@ -123,6 +127,7 @@ void Billy::Animation::WalkAnimation()
           this->GetPlayerRectangle()->x = (this->_currentFrame * this->GetPlayerTexture()->width) / 9;
      }
 
+     // Set frame speed animation
      if (IsKeyPressed(KEY_RIGHT))
      {
           this->_frameSpeed++;
@@ -142,10 +147,17 @@ void Billy::Animation::WalkAnimation()
      }
 }
 
-void Billy::Animation::UpdateAnimation()
+void Billy::Animation::PlayerController()
 {
      this->CheerAnimation();
 
+     PlayerMovement();
+
+     PlayerJump();
+}
+
+void Billy::Animation::PlayerMovement()
+{
      // Movement with keyboard input
      if (this->_isWalk)
      {
@@ -178,8 +190,8 @@ void Billy::Animation::UpdateAnimation()
           }
      }
 
-     // Movement with mouse gesture
      /*
+     // Movement with mouse gesture
      if (this->_isWalk)
      {
           *this->_playerPosition = GetMousePosition();
@@ -189,7 +201,7 @@ void Billy::Animation::UpdateAnimation()
      */
 }
 
-void Billy::Animation::UpdatePlayer()
+void Billy::Animation::PlayerJump()
 {
      // Player jump
      if (IsKeyDown(KEY_SPACE))
@@ -219,7 +231,7 @@ void Billy::Animation::UpdatePlayer()
      }
 }
 
-void Billy::Animation::UpdateCollision()
+void Billy::Animation::Collision()
 {
      // Left window collision
      if (this->GetPlayerPosition()->x < *this->_collision)
@@ -232,7 +244,7 @@ void Billy::Animation::UpdateCollision()
           }
      }
 
-     // Window right screen collision
+     // Right window collision
      if (this->GetPlayerPosition()->x > Screen::SCREEN_WIDTH)
      {
           this->_isCollision = true;
@@ -254,7 +266,7 @@ void Billy::Animation::UpdateCollision()
           }
      }
 
-     // Window bottom screen collision
+     // Bottom window collision
      if (this->GetPlayerPosition()->y > Screen::SCREEN_HEIGHT)
      {
           this->_isCollision = true;
@@ -266,23 +278,33 @@ void Billy::Animation::UpdateCollision()
      }
 }
 
-void Billy::Animation::Draw()
+void Billy::Animation::DrawSprite()
 {
-     DrawTextEx(*this->_font, "FRAME SPEED:", {5, 5}, 25, 1, DARKGRAY);
+     DrawTextureRec(*this->GetPlayerTexture(), *this->GetPlayerRectangle(), *this->GetPlayerPosition(), WHITE);
+}
+
+void Billy::Animation::DrawRectangleFrame()
+{
+     DrawTextEx(*this->_font, "FRAME SPEED:", {5.f, 5.f}, 25.f, 1.f, DARKGRAY);
 
      DrawText("PRESS RIGHT/LEFT KEYS to CHANGE SPEED!", 230, 40, 10, DARKGRAY);
 
-     for (uint32_t animation = 0; animation < MAX_FRAME_SPEED; animation++)
+     for (uint32_t animation = FP_ZERO; animation < MAX_FRAME_SPEED; animation++)
      {
           if (animation < this->_frameSpeed)
           {
-               DrawRectangle(160 + 21 * animation, 5, 20, 20, BLUE);
+               DrawRectangle(160 + 21 * animation, 5, 20, 20, PINK);
           }
 
-          DrawRectangleLines(160 + 21 * animation, 5, 20, 20, BLUE);
+          DrawRectangleLines(160 + 21 * animation, 5, 20, 20, PINK);
      }
+}
 
-     DrawTextureRec(*this->GetPlayerTexture(), *this->GetPlayerRectangle(), *this->GetPlayerPosition(), WHITE);
+void Billy::Animation::Draw()
+{
+     // DrawRectangleFrame();
+
+     DrawSprite();
 }
 
 Texture2D *Billy::Animation::GetPlayerTexture()
