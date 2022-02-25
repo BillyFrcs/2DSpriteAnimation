@@ -26,6 +26,8 @@ $ make
 ```
 
 > Get the [Raylib C++](https://github.com/CapsCollective/raylib-cpp-starter) template for making Games from scratch.
+\
+> Note: Make sure to import the Assets folder in App folder to run the build App if you download from the Github Action build.
 
 ## Assets
 
